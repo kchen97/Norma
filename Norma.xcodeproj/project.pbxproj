@@ -10,6 +10,8 @@
 		0D8B27EDEA5FC7C1A5E5A257 /* Pods_Norma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F54B6C2D42785923AA0429 /* Pods_Norma.framework */; };
 		220CC77320381D8900F32F8E /* ChatBotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CC77220381D8900F32F8E /* ChatBotTableViewCell.swift */; };
 		8EA734402038156E009ED90B /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7343F2038156E009ED90B /* ChatBotViewController.swift */; };
+		8E3DB6BF20381DB00006F408 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DB6BE20381DB00006F408 /* User.swift */; };
+		8EA734402038156E009ED90B /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7343F2038156E009ED90B /* JournalViewController.swift */; };
 		8EAA70012038137800FD3A72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA70002038137800FD3A72 /* AppDelegate.swift */; };
 		8EAA70062038137800FD3A72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAA70042038137800FD3A72 /* Main.storyboard */; };
 		8EAA70082038137800FD3A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAA70072038137800FD3A72 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 		220CC77220381D8900F32F8E /* ChatBotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTableViewCell.swift; sourceTree = "<group>"; };
 		4FC48F3D9001747C475C4F0B /* Pods-Norma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Norma.release.xcconfig"; path = "Pods/Target Support Files/Pods-Norma/Pods-Norma.release.xcconfig"; sourceTree = "<group>"; };
 		8EA7343F2038156E009ED90B /* ChatBotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
+		8E3DB6BE20381DB00006F408 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8EA7343F2038156E009ED90B /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		8EAA6FFD2038137800FD3A72 /* Norma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Norma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAA70002038137800FD3A72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EAA70052038137800FD3A72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +86,14 @@
 			path = Norma;
 			sourceTree = "<group>";
 		};
+		8EAA70122038138100FD3A72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E3DB6BE20381DB00006F408 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8EAA70132038138500FD3A72 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +109,7 @@
 				8EAA70002038137800FD3A72 /* AppDelegate.swift */,
 				8EA7343F2038156E009ED90B /* ChatBotViewController.swift */,
 				220CC77220381D8900F32F8E /* ChatBotTableViewCell.swift */,
+				8EA7343F2038156E009ED90B /* JournalViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -190,15 +203,19 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Norma/Pods-Norma-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +266,8 @@
 				8EAA70012038137800FD3A72 /* AppDelegate.swift in Sources */,
 				220CC77320381D8900F32F8E /* ChatBotTableViewCell.swift in Sources */,
 				8EA734402038156E009ED90B /* ChatBotViewController.swift in Sources */,
+				8EA734402038156E009ED90B /* JournalViewController.swift in Sources */,
+				8E3DB6BF20381DB00006F408 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
