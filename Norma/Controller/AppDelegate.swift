@@ -8,6 +8,10 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+
+var screenWidth = UIScreen.main.bounds.width
+var screenHeight = UIScreen.main.bounds.height
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
