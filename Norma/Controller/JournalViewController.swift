@@ -25,9 +25,8 @@ class JournalViewController: UIViewController {
                 self.currentUser.userID = id
                 self.ref = Database.database().reference().child((self.currentUser.userID)!)
 
-                self.saveJournal()
-                self.readJournal()
-
+                self.saveJournal("january", "1997", "test test test")
+                self.readJournal("january", "1997")
             }
         }
     }
@@ -38,17 +37,20 @@ class JournalViewController: UIViewController {
     }
     
     //MARK: Reading and Writing from Firebase
-    func saveJournal() {
+    func saveJournal(_ month: String, _ year: String, _ entry: String) {
         
-        ref.setValue(["january" : "test test test"])
+        ref.child(month).setValue([year : entry])
     }
     
-    func readJournal() {
+    func readJournal(_ month: String, _ year: String) {
         
         ref.observe(.value) { (snapshot) in
             
             if let journalDict = snapshot.value as? NSDictionary {
-                self.currentUser.journal = journalDict["january"] as? String
+                if let dict = journalDict[month] as? Dictionary<String, String> {
+                    self.currentUser.journal = dict[year]
+                    print(self.currentUser.journal)
+                }
             }
         }
     }
