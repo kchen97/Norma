@@ -11,31 +11,65 @@ import UIKit
 class ChatBotViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var intentLabel: UILabel!
-    @IBOutlet weak var actionBtn: UIButton!
+    @IBOutlet weak var actionBtn1: UIButton!
+    @IBOutlet weak var actionBtn2: UIButton!
+    @IBOutlet weak var actionBtn3: UIButton!
     @IBOutlet weak var tableView: UITableView!
 
+    var queries = [Query]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        intentLabel.text = "Lorem ipsum dolo sore est. Just some basic sample text to see if line wrapping is working"
-        actionBtn.layer.cornerRadius = 18
+        startingValues()
+        actionBtn1.layer.cornerRadius = 12
+        actionBtn2.layer.cornerRadius = 12
+        actionBtn3.layer.cornerRadius = 12
+    }
+    
+    func startingValues() {
+        queries.append(Query("Hi, I'm Norma", normaTalks: true))
+        intentLabel.text = "What would you like to do"
+        actionBtn1.setTitle("Start my monthly check", for: .normal)
+        actionBtn3.setTitle("Button 3", for: .normal)
+        actionBtn2.isHidden = true
+    }
+    
+    @IBAction func actionSelected(_ sender: UIButton) {
+        let action = sender.currentTitle ?? ""
+        queries.append(Query(action, normaTalks: false))
+        tableView.reloadData()
+        sendActionRequest(action)
+    }
+    
+    @IBAction func home() {
+        
+    }
+    
+    @IBAction func profile() {
+        
+    }
+    
+    func sendActionRequest(_ action: String) {
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
+        return queries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "queryCell") as! ChatBotTableViewCell
-        var normaTalks = true
+        let query = queries[indexPath.row]
         
-        if(normaTalks) {
+        if(query.normaTalks) {
             cell.rightSpacing.constant = screenWidth*0.25
+            cell.backView.backgroundColor = UIColor.blue
         } else {
             cell.leftSpacing.constant = screenWidth*0.25
+            cell.backView.backgroundColor = UIColor.lightGray
         }
-        cell.label.text = "Lorem ipsum dolo sore est. Just some basic sample text to see if line wrapping is working"
-        //cell.label.text = "Hi this is Norma"
+        cell.label.text = query.text
         return cell
     }
 
