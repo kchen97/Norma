@@ -1,0 +1,6 @@
+framework module Pods_Norma {
+  umbrella header "Pods-Norma-umbrella.h"
+
+  export *
+  module * { export * }
+}
