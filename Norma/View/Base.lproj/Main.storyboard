@@ -13,7 +13,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Journal View Controller-->
+        <!--Journal-->
         <scene sceneID="IpL-ze-fbB">
             <objects>
                 <viewController id="O77-OJ-4y7" customClass="JournalViewController" customModule="Norma" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,11 +21,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Journals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLM-dS-PGy">
+                                <rect key="frame" x="0.0" y="68" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="k4h-td-ZGD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9s3-4v-Tyq">
-                                <rect key="frame" x="0.0" y="122" width="375" height="545"/>
+                                <rect key="frame" x="0.0" y="122" width="375" height="496"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="journalEntryCell" textLabel="3v2-vI-9p0" detailTextLabel="VnF-5n-RE7" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="c1z-Py-8aX" customClass="JournalTableViewCell" customModule="Norma" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="entryCell" textLabel="3v2-vI-9p0" detailTextLabel="VnF-5n-RE7" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="c1z-Py-8aX" customClass="JournalTableViewCell" customModule="Norma" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c1z-Py-8aX" id="ndy-2g-NAC" customClass="JournalTableViewCell" customModule="Norma" customModuleProvider="target">
@@ -51,40 +60,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Journal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLM-dS-PGy">
-                                <rect key="frame" x="0.0" y="68" width="375" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="sfY-di-krb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="trailing" secondItem="Jxh-bt-hMg" secondAttribute="trailing" id="7ed-1U-Kan"/>
-                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="leading" secondItem="Jxh-bt-hMg" secondAttribute="leading" id="LeV-9b-IGw"/>
-                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="bottom" secondItem="Jxh-bt-hMg" secondAttribute="bottom" id="O97-y8-P63"/>
-                            <constraint firstItem="XLM-dS-PGy" firstAttribute="top" secondItem="Jxh-bt-hMg" secondAttribute="top" constant="4" id="aUQ-cg-aAf"/>
-                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="top" secondItem="XLM-dS-PGy" secondAttribute="bottom" constant="4" id="bTh-34-lnd"/>
-                            <constraint firstItem="XLM-dS-PGy" firstAttribute="leading" secondItem="Jxh-bt-hMg" secondAttribute="leading" id="onc-le-M3i"/>
-                            <constraint firstItem="XLM-dS-PGy" firstAttribute="trailing" secondItem="Jxh-bt-hMg" secondAttribute="trailing" id="ynb-Ry-mGE"/>
+                            <constraint firstItem="XLM-dS-PGy" firstAttribute="top" secondItem="Jxh-bt-hMg" secondAttribute="top" constant="4" id="Blk-Rc-HOr"/>
+                            <constraint firstItem="XLM-dS-PGy" firstAttribute="trailing" secondItem="Jxh-bt-hMg" secondAttribute="trailing" id="J6G-RD-jAV"/>
+                            <constraint firstItem="Jxh-bt-hMg" firstAttribute="bottom" secondItem="9s3-4v-Tyq" secondAttribute="bottom" id="OYp-hl-Nxm"/>
+                            <constraint firstItem="XLM-dS-PGy" firstAttribute="leading" secondItem="Jxh-bt-hMg" secondAttribute="leading" id="QNT-z6-euX"/>
+                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="leading" secondItem="Jxh-bt-hMg" secondAttribute="leading" id="S5r-tw-ght"/>
+                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="trailing" secondItem="Jxh-bt-hMg" secondAttribute="trailing" id="URU-Yw-RZQ"/>
+                            <constraint firstItem="9s3-4v-Tyq" firstAttribute="top" secondItem="XLM-dS-PGy" secondAttribute="bottom" constant="4" id="iBR-rj-97P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jxh-bt-hMg"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Journal" id="E7v-xK-wMT"/>
                     <navigationItem key="navigationItem" id="moW-7q-ymw">
                         <barButtonItem key="leftBarButtonItem" title="Home" id="Blf-fu-WYj"/>
                         <barButtonItem key="rightBarButtonItem" title="Norma" id="kG8-E6-Eq7"/>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="journalTableView" destination="9s3-4v-Tyq" id="b3C-Ep-Rly"/>
+                        <outlet property="journalTableView" destination="9s3-4v-Tyq" id="4pD-Dq-TI1"/>
                         <segue destination="bL7-hP-UXc" kind="show" identifier="showNotes" id="f5d-l7-ypN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eW2-44-F41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991.20000000000005" y="663.41829085457277"/>
+            <point key="canvasLocation" x="1116" y="630.13493253373315"/>
         </scene>
         <!--Entry View Controller-->
         <scene sceneID="sdf-ly-imd">
@@ -94,20 +96,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="asdasd" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rdV-iV-IOS">
-                                <rect key="frame" x="6" y="70" width="363" height="591"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0t-cM-7e4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="J9e-ec-tjM"/>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="asdasd" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rdV-iV-IOS">
+                                <rect key="frame" x="6" y="147" width="363" height="487"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="HjW-T3-Xwp" firstAttribute="bottom" secondItem="rdV-iV-IOS" secondAttribute="bottom" constant="6" id="9I1-GI-M8O"/>
-                            <constraint firstItem="rdV-iV-IOS" firstAttribute="top" secondItem="HjW-T3-Xwp" secondAttribute="top" constant="6" id="D64-Bk-yhg"/>
-                            <constraint firstItem="rdV-iV-IOS" firstAttribute="leading" secondItem="HjW-T3-Xwp" secondAttribute="leading" constant="6" id="DEw-e3-cYh"/>
-                            <constraint firstItem="HjW-T3-Xwp" firstAttribute="trailing" secondItem="rdV-iV-IOS" secondAttribute="trailing" constant="6" id="oNY-xB-TAC"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HjW-T3-Xwp"/>
                     </view>
                     <navigationItem key="navigationItem" id="g0A-Qg-wyY">
@@ -119,12 +123,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="notesTextView" destination="rdV-iV-IOS" id="LIS-Vb-FGw"/>
-                        <segue destination="Csb-gz-1H9" kind="show" identifier="returnAfterSave" id="IKc-dU-8hX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7me-vm-epY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1725.5999999999999" y="-104.7976011994003"/>
+            <point key="canvasLocation" x="2068" y="581.55922038980509"/>
         </scene>
         <!--ChatBot-->
         <scene sceneID="6qv-ML-rzw">
@@ -376,9 +379,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Csb-gz-1H9" kind="relationship" relationship="viewControllers" id="2Ey-oj-440"/>
                         <segue destination="T0g-Nz-us7" kind="relationship" relationship="viewControllers" id="oOV-RC-7c0"/>
-                        <segue destination="O77-OJ-4y7" kind="relationship" relationship="viewControllers" id="2Ey-oj-440"/>
+                        <segue destination="Csb-gz-1H9" kind="relationship" relationship="viewControllers" id="blS-td-b7e"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3A-m8-TZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -402,10 +404,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="adN-bu-mF1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="663"/>
+            <point key="canvasLocation" x="-94" y="878"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="IKc-dU-8hX"/>
-    </inferredMetricsTieBreakers>
 </document>
