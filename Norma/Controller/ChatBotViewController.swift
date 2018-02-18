@@ -9,6 +9,9 @@
 import UIKit
 import HoundifySDK
 import FirebaseDatabase
+import Hero
+
+var username = ""
 
 class ChatBotViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -20,7 +23,6 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
 
     var queries = [Query]()
-    var username = ""
     var firstTime = true
     var ref : DatabaseReference!
     
@@ -57,7 +59,6 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
         let action = sender.currentTitle ?? ""
         if(action == "Rebecca" || action == "Pooja" || action == "Susan") {
             username = action
-            //ref.child(currentUser.uid)
             queries.append(Query(action, normaTalks: false))
             tableView.reloadData()
             sendActionRequest(action)
@@ -72,7 +73,14 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
         } else if(action == "Calling provider: 555 636 1982") {
             UIApplication.shared.open(URL(string: "tel://5556361982")!)
         } else if(action == "Ok thank you Norma!") {
-            self.dismiss(animated: true, completion: nil)
+            queries.append(Query(action, normaTalks: false))
+            tableView.reloadData()
+            scrollToBottom(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+                vc.hero.modalAnimationType = .uncover(direction: .up)
+                self.hero.replaceViewController(with: vc)
+            }
         } else {
             queries.append(Query(action, normaTalks: false))
             tableView.reloadData()
@@ -81,13 +89,15 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func home() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "home")
-        self.present(vc!, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+        vc.hero.modalAnimationType = .uncover(direction: .up)
+        hero.replaceViewController(with: vc)
     }
     
     @IBAction func profile() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile")
-        self.present(vc!, animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile") as! ProfileViewController
+        vc.hero.modalAnimationType = .uncover(direction: .up)
+        hero.replaceViewController(with: vc)
     }
     
     func sendActionRequest(_ action: String) {

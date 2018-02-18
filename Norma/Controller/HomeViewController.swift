@@ -34,7 +34,8 @@ class HomeViewController: UIViewController {
     @IBAction func checkTheNorm() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "chatBot") as! ChatBotViewController
         vc.firstTime = false
-        self.present(vc, animated: true, completion: nil)
+        vc.hero.modalAnimationType = .cover(direction: .up)
+        hero.replaceViewController(with: vc)
     }
     
     @IBAction func shareTheNorm(_ sender: UIButton) {
@@ -48,12 +49,14 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func journalBtn() {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "journal")
+        present(vc!, animated: true, completion: nil)
     }
     
     @IBAction func profileBtn() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile")
-        self.present(vc!, animated: true, completion: nil)
+        vc!.hero.modalAnimationType = .cover(direction: .up)
+        hero.replaceViewController(with: vc!)
     }
     
 

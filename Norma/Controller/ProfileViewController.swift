@@ -19,4 +19,10 @@ class ProfileViewController: UIViewController {
         name.layer.borderWidth = 3
         name.layer.borderColor = UIColor.white.cgColor
     }
+    
+    @IBAction func home() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+        vc.hero.modalAnimationType = .uncover(direction: .up)
+        hero.replaceViewController(with: vc)
+    }
 }

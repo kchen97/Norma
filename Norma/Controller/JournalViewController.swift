@@ -27,13 +27,6 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         setupUI()
         
-//        Auth.auth().signInAnonymously { (user, error) in
-//            if let id = user?.uid {
-//                currentUser.userID = id
-//
-//            }
-//        }
-        
         if let user = Auth.auth().currentUser {
             self.ref = Database.database().reference().child(user.uid)
             //self.ref.updateChildValues(["\(Calendar.current.component(.year, from: Date()))" : "Test"])
@@ -41,9 +34,9 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     //MARK: UI Setup
@@ -68,17 +61,27 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
             }
             
-            self.entryArray.sorted(by: { $0.date.compare($1.date) == .orderedAscending })
-            
+            self.entryArray = self.entryArray.sorted(by: { $0.date.compare($1.date) == .orderedDescending })
             self.journalTableView.reloadData()
             
         }
     }
     
+    @IBAction func home() {
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+//        vc.hero.modalAnimationType = .uncover(direction: .up)
+//        hero.replaceViewController(with: vc)
+        hero.dismissViewController()
+    }
+    
+    @IBAction func profile() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile") as! ProfileViewController
+        vc.hero.modalAnimationType = .uncover(direction: .up)
+        hero.replaceViewController(with: vc)
+    }
+    
     //MARK: Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         return entryArray.count
     }
 
