@@ -13,5 +13,6 @@ pod 'SwiftyJSON'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'HoundifySDK'
+pod 'Hero'
 
 end

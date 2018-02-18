@@ -21,7 +21,7 @@ class ChatBotTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         backView.layer.cornerRadius = 12
-        label.textColor = UIColor.white
+        label.textColor = UIColor.black
     }
 
 }
