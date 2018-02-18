@@ -14,6 +14,9 @@
 		22F6E1FE2038DB6A0017C602 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6E1FD2038DB6A0017C602 /* HomeViewController.swift */; };
 		22F6E2002038DB740017C602 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6E1FF2038DB740017C602 /* ProfileViewController.swift */; };
 		22F6E20620391A010017C602 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6E20520391A010017C602 /* Collection.swift */; };
+		8E0C04272038F8F60003DC89 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C04262038F8F60003DC89 /* EntryViewController.swift */; };
+		8E1E451A2038D62B0080B25B /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1E45192038D62B0080B25B /* JournalEntry.swift */; };
+		8E259A412038CD4A00161F7E /* JournalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E259A402038CD4A00161F7E /* JournalTableViewCell.swift */; };
 		8E3DB6BF20381DB00006F408 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3DB6BE20381DB00006F408 /* User.swift */; };
 		8EA734402038156E009ED90B /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA7343F2038156E009ED90B /* JournalViewController.swift */; };
 		8EAA70012038137800FD3A72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA70002038137800FD3A72 /* AppDelegate.swift */; };
@@ -32,6 +35,9 @@
 		22F6E1FF2038DB740017C602 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		22F6E20520391A010017C602 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		4FC48F3D9001747C475C4F0B /* Pods-Norma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Norma.release.xcconfig"; path = "Pods/Target Support Files/Pods-Norma/Pods-Norma.release.xcconfig"; sourceTree = "<group>"; };
+		8E0C04262038F8F60003DC89 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		8E1E45192038D62B0080B25B /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
+		8E259A402038CD4A00161F7E /* JournalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewCell.swift; sourceTree = "<group>"; };
 		8E3DB6BE20381DB00006F408 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8EA7343F2038156E009ED90B /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		8EAA6FFD2038137800FD3A72 /* Norma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Norma.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				8E3DB6BE20381DB00006F408 /* User.swift */,
+				8E1E45192038D62B0080B25B /* JournalEntry.swift */,
 				22F6E1FB2038CC690017C602 /* Query.swift */,
 			);
 			path = Model;
@@ -121,8 +128,10 @@
 				22F6E1FD2038DB6A0017C602 /* HomeViewController.swift */,
 				22F6E1FF2038DB740017C602 /* ProfileViewController.swift */,
 				8EA7343F2038156E009ED90B /* JournalViewController.swift */,
+				8E259A402038CD4A00161F7E /* JournalTableViewCell.swift */,
 				22F6E1BB2038B0100017C602 /* ChatBotViewController.swift */,
 				22F6E1BD2038B0210017C602 /* ChatBotTableViewCell.swift */,
+				8E0C04262038F8F60003DC89 /* EntryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -281,9 +290,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EAA70012038137800FD3A72 /* AppDelegate.swift in Sources */,
+				8E259A412038CD4A00161F7E /* JournalTableViewCell.swift in Sources */,
 				8EA734402038156E009ED90B /* JournalViewController.swift in Sources */,
 				22F6E1BE2038B0210017C602 /* ChatBotTableViewCell.swift in Sources */,
 				22F6E1BC2038B0100017C602 /* ChatBotViewController.swift in Sources */,
+				8E0C04272038F8F60003DC89 /* EntryViewController.swift in Sources */,
+				8E1E451A2038D62B0080B25B /* JournalEntry.swift in Sources */,
 				22F6E1FC2038CC690017C602 /* Query.swift in Sources */,
 				22F6E1FE2038DB6A0017C602 /* HomeViewController.swift in Sources */,
 				22F6E2002038DB740017C602 /* ProfileViewController.swift in Sources */,
@@ -427,7 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7BT7DC73YL;
+				DEVELOPMENT_TEAM = 2J85MR725D;
 				INFOPLIST_FILE = Norma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -444,7 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7BT7DC73YL;
+				DEVELOPMENT_TEAM = 2J85MR725D;
 				INFOPLIST_FILE = Norma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
