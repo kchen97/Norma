@@ -12,5 +12,6 @@ pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
+pod 'HoundifySDK'
 
 end
