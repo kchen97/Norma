@@ -9,11 +9,14 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    @IBOutlet weak var name: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        name.layer.cornerRadius = 30
+        name.layer.borderWidth = 3
+        name.layer.borderColor = UIColor.white.cgColor
     }
-    
 }

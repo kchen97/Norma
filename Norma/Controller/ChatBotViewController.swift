@@ -8,7 +8,7 @@
 
 import UIKit
 import HoundifySDK
-import SwiftyJSON
+import FirebaseDatabase
 
 class ChatBotViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -20,11 +20,16 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
 
     var queries = [Query]()
+    var username = ""
+    var ref : DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         startingValues()
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        
+        ref = Database.database().reference()
         
         for button in stackView.arrangedSubviews {
             button.layer.cornerRadius = 12
@@ -32,8 +37,8 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func startingValues() {
-        queries.append(Query("Welcome back!", normaTalks: true))
-        intentLabel.text = "What would you like to do"
+        queries.append(Query("Hi, I'm Norma", normaTalks: true))
+        intentLabel.text = "Pick an option from below"
         actionBtn1.setTitle("Hello", for: .normal)
         actionBtn2.isHidden = true
         actionBtn3.isHidden = true
@@ -43,15 +48,33 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
         let action = sender.currentTitle ?? ""
         queries.append(Query(action, normaTalks: false))
         tableView.reloadData()
-        sendActionRequest(action)
+        if(action == "Rebecca" || action == "Pooja" || action == "Susan") {
+            username = action
+            //ref.child(currentUser.uid)
+            sendActionRequest(action)
+        } else if(action == "Let me tell a friend") {
+            let textToShare = "I found this great App called Norma, you should check it out!"
+            if let myWebsite = NSURL(string: "https://appsite.skygear.io/norma/") {
+                let objectsToShare = [textToShare, myWebsite] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.popoverPresentationController?.sourceView = sender
+                self.present(activityVC, animated: true, completion: nil)
+            }
+        } else if(action == "555 636 1982") {
+            UIApplication.shared.open(URL(string: "tel://5556361982")!)
+        } else {
+            sendActionRequest(action)
+        }
     }
     
     @IBAction func home() {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "home")
+        self.present(vc!, animated: true, completion: nil)
     }
     
     @IBAction func profile() {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "profile")
+        self.present(vc!, animated: true, completion: nil)
     }
     
     func sendActionRequest(_ action: String) {
@@ -69,11 +92,35 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func parseJSON(_ dict: [String:Any]) {
-        let json = JSON(dict)
-        let jsonClean = json["AllResults"]
-        print(dict)
-        //let response = jsonClean[SpokenResponseLong]
-        print(response)
+        
+        let json = dict["AllResults"] as? [[String:Any]]
+        let choices = json?[0]["Result"] as? [String] ?? ["Error"]
+        var response = json?[0]["SpokenResponse"] as? String ?? "Error"
+        
+        if(response.contains("*user_name*")) {
+            response = response.replacingOccurrences(of: "*user_name*", with: username)
+        }
+        
+        queries.append(Query(response, normaTalks: true))
+        
+        for i in 0...2 {
+            let btn = stackView.arrangedSubviews[i] as? UIButton
+            if let choice = choices[safe: i] {
+                btn?.setTitle(choice, for: .normal)
+                btn?.isHidden = false
+            } else {
+                btn?.isHidden = true
+            }
+        }
+        tableView.reloadData()
+        scrollToBottom(animated: true)
+    }
+    
+    func scrollToBottom(animated: Bool) {
+        DispatchQueue.main.async {
+            let index = IndexPath(row: self.queries.count-1, section: 0)
+            self.tableView.scrollToRow(at: index, at: .top, animated: animated)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,10 +133,12 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if(query.normaTalks) {
             cell.rightSpacing.constant = screenWidth*0.25
-            cell.backView.backgroundColor = UIColor.blue
+            cell.leftSpacing.constant = 8
+            cell.backView.backgroundColor = #colorLiteral(red: 0.8823529412, green: 0.8784313725, blue: 0.9137254902, alpha: 1)
         } else {
             cell.leftSpacing.constant = screenWidth*0.25
-            cell.backView.backgroundColor = UIColor.lightGray
+            cell.rightSpacing.constant = 8
+            cell.backView.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.7725490196, blue: 0.9960784314, alpha: 1)
         }
         cell.label.text = query.text
         return cell
