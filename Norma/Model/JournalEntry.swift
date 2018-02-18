@@ -8,15 +8,28 @@
 
 import Foundation
 
+enum FormatType : String {
+    case pretty = "MMM d, yyyy"
+    case ugly = "MM-d-yyyy"
+}
+
 class JournalEntry {
     
-    var month : String?
-    var year : String?
-    var entry : String?
+    var date : Date
+    var entry : String
     
-    init(_ month : String, _ year : String, _ entry : String) {
-        self.month = month
-        self.year = year
+    init(_ date : Date, _ entry : String) {
+        self.date = date
         self.entry = entry
+    }
+    
+    func convertDateToString(_ format: FormatType) -> String {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = format.rawValue
+        let newDate = dateFormatter.string(from: date)
+        
+        return newDate
+        
     }
 }

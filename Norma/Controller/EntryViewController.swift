@@ -13,9 +13,7 @@ class EntryViewController: UIViewController {
 
     //MARK: Properties
     @IBOutlet weak var notesTextView: UITextView!
-    var month : String?
-    var year : String?
-    var entry : String?
+    var selectedEntry : JournalEntry?
     var ref = Database.database().reference().child((Auth.auth().currentUser?.uid)!)
     
     override func viewDidLoad() {
@@ -32,30 +30,28 @@ class EntryViewController: UIViewController {
     //MARK: UI Setup
     func loadEntryUI() {
         
-        if let m = month, let y = year, let e = entry {
+        if let sEntry = selectedEntry {
             
-            navigationItem.title = m + "/" + y
-            notesTextView.text = e
+            navigationItem.title = sEntry.convertDateToString(.pretty)
+            notesTextView.text = sEntry.entry
         }
         
-        notesTextView.backgroundColor = UIColor.yellow
+        notesTextView.backgroundColor = UIColor.white
         notesTextView.layer.cornerRadius = 12
     }
     
     //MARK: Actions
     @IBAction func savePressed(_ sender: UIBarButtonItem) {
         
-        if let m = month, let y = year, !notesTextView.text.isEmpty {
-            self.entry = notesTextView.text
-            saveJournal(m, y, entry!)
+        if let selEntry = selectedEntry, !notesTextView.text.isEmpty {
+            selEntry.entry = notesTextView.text
+            saveJournal(selEntry)
         }
     }
     
-    func saveJournal(_ month: String, _ year: String, _ entry: String) {
+    func saveJournal(_ entry: JournalEntry) {
         
-        print(month, year, entry)
-        
-        ref.child(month).updateChildValues([year : entry])
+        ref.updateChildValues([entry.convertDateToString(.ugly) : entry.entry])
         
         navigationController?.popViewController(animated: true)
     }

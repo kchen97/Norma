@@ -18,28 +18,26 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     //MARK: Properties
     @IBOutlet weak var journalTableView: UITableView!
     var ref : DatabaseReference!
-    var month : String?
-    var year : String?
-    var entry : String?
+    var selectedEntry : JournalEntry?
     var entryArray = [JournalEntry]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         setupUI()
         
-        Auth.auth().signInAnonymously { (user, error) in
-
-            if let id = user?.uid {
-                currentUser.userID = id
-                self.ref = Database.database().reference().child(id)
-                
-                self.ref.updateChildValues(["\(Calendar.current.component(.month, from: Date()))" : ["\(Calendar.current.component(.year, from: Date()))" : "Test Test TEst"]])
-            
-                print(currentUser.userID)
-                
-                self.readJournal()
-            }
+//        Auth.auth().signInAnonymously { (user, error) in
+//            if let id = user?.uid {
+//                currentUser.userID = id
+//
+//            }
+//        }
+        
+        if let user = Auth.auth().currentUser {
+            self.ref = Database.database().reference().child(user.uid)
+            //self.ref.updateChildValues(["\(Calendar.current.component(.year, from: Date()))" : "Test"])
+            self.readJournal()
         }
     }
 
@@ -61,22 +59,16 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             self.entryArray.removeAll()
             if let journalDict = snapshot.value as? NSDictionary {
-                print(journalDict)
-                if let monthKeys = journalDict.allKeys as? [String] {
-                    print(monthKeys)
-                    for month in monthKeys {
-                        if let yearDictionary = journalDict[month] as? NSDictionary {
-                            if let yearKeys = yearDictionary.allKeys as? [String] {
-                                print(yearKeys)
-                                for year in yearKeys {
-                                    let text = yearDictionary[year] as? String ?? "error"
-                                    self.entryArray.append(JournalEntry(month, year, text))
-                                }
-                            }
-                        }
+                if let dateKeys = journalDict.allKeys as? [String] {
+                    for dateString in dateKeys {
+                        let someEntry = JournalEntry(self.convertStringToDate(dateString), journalDict[dateString] as! String)
+                        self.entryArray.append(someEntry)
                     }
                 }
+                
             }
+            
+            self.entryArray.sorted(by: { $0.date.compare($1.date) == .orderedAscending })
             
             self.journalTableView.reloadData()
             
@@ -94,20 +86,21 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let correspondingJournalEntry = entryArray[indexPath.row]
-        print(correspondingJournalEntry.month)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell") as? UITableViewCell
-
-        cell?.textLabel?.text = correspondingJournalEntry.month! + "/" + correspondingJournalEntry.year!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell")
+        
+        
+        cell?.textLabel?.text = correspondingJournalEntry.convertDateToString(.pretty)
         cell?.detailTextLabel?.text = correspondingJournalEntry.entry
-        print(cell)
+        
 
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.month = entryArray[indexPath.row].month
-        self.year = entryArray[indexPath.row].year
-        self.entry = entryArray[indexPath.row].entry
+        
+        self.selectedEntry = entryArray[indexPath.row]
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: "showNotes", sender: self)
     }
@@ -117,10 +110,17 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if segue.identifier == "showNotes" {
             if let destination = segue.destination as? EntryViewController {
-                destination.month = self.month!
-                destination.year = self.year!
-                destination.entry = self.entry
+                destination.selectedEntry = self.selectedEntry
             }
         }
+    }
+    
+    
+    func convertStringToDate(_ dateString : String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy" //Your date format
+        let newDate = dateFormatter.date(from: dateString) //according to date format your date string
+        
+        return newDate!
     }
 }
