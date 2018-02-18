@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import SVProgressHUD
 
 var currentUser = User()
 
@@ -55,6 +56,7 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     //MARK: Reading from Firebase
     func readJournal() {
         
+        SVProgressHUD.show()
         ref.observe(.value) { (snapshot) in
             
             self.entryArray.removeAll()
@@ -71,7 +73,7 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.entryArray.sorted(by: { $0.date.compare($1.date) == .orderedAscending })
             
             self.journalTableView.reloadData()
-            
+            SVProgressHUD.dismiss()
         }
     }
     
