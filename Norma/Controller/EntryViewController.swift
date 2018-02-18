@@ -34,7 +34,7 @@ class EntryViewController: UIViewController {
         
         if let m = month, let y = year, let e = entry {
             
-            navigationItem.title = m.capitalized + " " + y
+            navigationItem.title = m + "/" + y
             notesTextView.text = e
         }
         
@@ -54,6 +54,7 @@ class EntryViewController: UIViewController {
     func saveJournal(_ month: String, _ year: String, _ entry: String) {
         
         print(month, year, entry)
+        
         ref.child(month).updateChildValues([year : entry])
         
         navigationController?.popViewController(animated: true)

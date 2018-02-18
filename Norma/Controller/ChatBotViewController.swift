@@ -73,7 +73,7 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
         let jsonClean = json["AllResults"]
         print(dict)
         //let response = jsonClean[SpokenResponseLong]
-        print(response)
+        //print(response)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
