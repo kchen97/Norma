@@ -21,6 +21,7 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
 
     var queries = [Query]()
     var username = ""
+    var firstTime = true
     var ref : DatabaseReference!
     
     override func viewDidLoad() {
@@ -37,20 +38,28 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func startingValues() {
-        queries.append(Query("Hi, I'm Norma", normaTalks: true))
-        intentLabel.text = "Pick an option from below"
-        actionBtn1.setTitle("Hello", for: .normal)
-        actionBtn2.isHidden = true
-        actionBtn3.isHidden = true
+        if(firstTime) {
+            queries.append(Query("Hi, I'm Norma", normaTalks: true))
+            intentLabel.text = "Pick an option from below"
+            actionBtn1.setTitle("Hello", for: .normal)
+            actionBtn2.isHidden = true
+            actionBtn3.isHidden = true
+        } else {
+            queries.append(Query("Welcome back", normaTalks: true))
+            intentLabel.text = "Pick an option from below"
+            actionBtn1.setTitle("Mirror", for: .normal)
+            actionBtn2.setTitle("Standing in the shower", for: .normal)
+            actionBtn3.setTitle("Lying down", for: .normal)
+        }
     }
     
     @IBAction func actionSelected(_ sender: UIButton) {
         let action = sender.currentTitle ?? ""
-        queries.append(Query(action, normaTalks: false))
-        tableView.reloadData()
         if(action == "Rebecca" || action == "Pooja" || action == "Susan") {
             username = action
             //ref.child(currentUser.uid)
+            queries.append(Query(action, normaTalks: false))
+            tableView.reloadData()
             sendActionRequest(action)
         } else if(action == "Let me tell a friend") {
             let textToShare = "I found this great App called Norma, you should check it out!"
@@ -60,9 +69,13 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
                 activityVC.popoverPresentationController?.sourceView = sender
                 self.present(activityVC, animated: true, completion: nil)
             }
-        } else if(action == "555 636 1982") {
+        } else if(action == "Calling provider: 555 636 1982") {
             UIApplication.shared.open(URL(string: "tel://5556361982")!)
+        } else if(action == "Ok thank you Norma!") {
+            self.dismiss(animated: true, completion: nil)
         } else {
+            queries.append(Query(action, normaTalks: false))
+            tableView.reloadData()
             sendActionRequest(action)
         }
     }
