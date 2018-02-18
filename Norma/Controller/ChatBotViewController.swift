@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import HoundifySDK
+import SwiftyJSON
 
 class ChatBotViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var intentLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var actionBtn1: UIButton!
     @IBOutlet weak var actionBtn2: UIButton!
     @IBOutlet weak var actionBtn3: UIButton!
@@ -22,17 +25,18 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
 
         startingValues()
-        actionBtn1.layer.cornerRadius = 12
-        actionBtn2.layer.cornerRadius = 12
-        actionBtn3.layer.cornerRadius = 12
+        
+        for button in stackView.arrangedSubviews {
+            button.layer.cornerRadius = 12
+        }
     }
     
     func startingValues() {
-        queries.append(Query("Hi, I'm Norma", normaTalks: true))
+        queries.append(Query("Welcome back!", normaTalks: true))
         intentLabel.text = "What would you like to do"
-        actionBtn1.setTitle("Start my monthly check", for: .normal)
-        actionBtn3.setTitle("Button 3", for: .normal)
+        actionBtn1.setTitle("Hello", for: .normal)
         actionBtn2.isHidden = true
+        actionBtn3.isHidden = true
     }
     
     @IBAction func actionSelected(_ sender: UIButton) {
@@ -51,7 +55,25 @@ class ChatBotViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func sendActionRequest(_ action: String) {
+        let requestInfoJSON: [String : Any] = ["StoredGlobalPagesToMatch":["pg1"]]
         
+        HoundTextSearch.instance().search(withQuery: action, requestInfo: requestInfoJSON, completionHandler:
+            { (error: Error?, myQuery: String, houndServer: HoundDataHoundServer?, dictionary: [String : Any]?, requestInfo: [String : Any]?) in
+                if let error = error as NSError? {
+                    print("\(error.domain) (\(error.code))\n\(error.localizedDescription)")
+                } else if houndServer != nil, let dictionary = dictionary {
+                    self.parseJSON(dictionary)
+                }
+            }
+        )
+    }
+    
+    func parseJSON(_ dict: [String:Any]) {
+        let json = JSON(dict)
+        let jsonClean = json["AllResults"]
+        print(dict)
+        //let response = jsonClean[SpokenResponseLong]
+        print(response)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

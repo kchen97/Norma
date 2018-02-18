@@ -230,6 +230,7 @@
                         <outlet property="actionBtn2" destination="ZPg-YK-irJ" id="sps-x0-ego"/>
                         <outlet property="actionBtn3" destination="zl2-iC-szt" id="8e4-zC-f4w"/>
                         <outlet property="intentLabel" destination="GLj-yc-z5n" id="T5b-kL-9BO"/>
+                        <outlet property="stackView" destination="1H8-HJ-OLx" id="Ydh-Vy-tZe"/>
                         <outlet property="tableView" destination="ylh-o8-PME" id="SnK-6x-We5"/>
                     </connections>
                 </viewController>
