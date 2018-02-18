@@ -20,7 +20,6 @@ class ChatBotTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        backView.backgroundColor = UIColor.blue
         backView.layer.cornerRadius = 12
         label.textColor = UIColor.white
     }

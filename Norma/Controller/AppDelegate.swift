@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import HoundifySDK
 
 var screenWidth = UIScreen.main.bounds.width
 var screenHeight = UIScreen.main.bounds.height
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Auth.auth().signInAnonymously { (user, error) in
             
         }
+        Hound.setClientID("4h0zmgiIFw7XUK1PNNrldA==")
+        Hound.setClientKey("-IaP4DBdxGP7zIi_21jVELYC3kz-H7SVzjiyrb6ASVIfolXwuJbm2gub5_65-x_cDx7O6eTMY8_dmkfCh4Xaww==")
         
         return true
     }
